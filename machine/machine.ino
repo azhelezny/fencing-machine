@@ -6,6 +6,7 @@ int lachPin = 8;
 
 byte bt[8] = {B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111};
 
+int sizeOf = 8
 void setup()
 {
   pinMode(dataPin, OUTPUT);
@@ -14,7 +15,7 @@ void setup()
 
   
   digitalWrite(lachPin, LOW);
-  for(int i=0;i<8;i++)
+  for(int i=0;i<sizeOf;i++)
   {
     shiftOut(dataPin, clockPin, LSBFIRST, B00000000);
   }  
@@ -30,7 +31,7 @@ void writeByte(byte * value)
 void loop()
 {
   digitalWrite(lachPin, LOW);
-  for(int i=7;i>=0;i--)
-    shiftOut(dataPin, clockPin, LSBFIRST, bt[i]);
+  for(int i=sizeOf;i>0;i--)
+    shiftOut(dataPin, clockPin, LSBFIRST, bt[i-1]);
   digitalWrite(lachPin, HIGH);
 }
